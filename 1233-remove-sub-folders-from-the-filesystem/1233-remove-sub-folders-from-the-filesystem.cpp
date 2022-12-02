@@ -4,7 +4,7 @@ public:
 #define     pb                  push_back
 #define     all(a)              a.begin(),a.end()
 #define     ll                  long long
-	#define     vi                  vector<int>
+#define     vi                  vector<int>
 #define     vvi                 vector<vi>
 #define 	vvc					std::vector<std::vector<char>>
 #define     ff                  first
@@ -25,95 +25,46 @@ public:
 
 
 struct Node
-{
-	string name;
-	int has;
-	std::vector<Node*> set;
-
-	Node(string _val){
-		has = 0;
-		name = _val;
-	};
+{   
+    Node* links[26];
+    bool flag = 0;
+    
 };
-
-
-void traversal(Node* root, std::vector<string> &ans, string curr)
-{
-	if(root->set.size() == 0){
-		ans.pb(curr);
-		return;
-	}
-	for(auto x : root->set){
-		string temp = curr;
-		temp.pb('/');
-		temp.insert(temp.end(), all(x->name));
-
-		traversal(x, ans, temp);
-	}
-}
-
-void func(Node* root, int i, string s)
-{
-	int n = s.size();
-	if(i >= s.size()){
-		return;
-	}
-	if(s[i] == '/'){
-		func(root, i+1, s);
-		return;
-	}
-	int j = i;
-	while(j<s.size() and s[j] != '/'){
-		j++;
-	}
-	string k = s.substr(i, j-i);
-
-	// cout << i << " " << j;br
-	// cout << k;br;
-
-	bool flag = 0;
-	for(auto x : root->set){
-		if(x->name == k and x->has == 1){
-			return;
-		}if(x->name == k){
-			func(x, j+1, s);
-			flag = 1;
-		}
-	}
-	if(flag){
-		return;
-	}
-	Node* temp = new Node(k);
-	root->set.pb(temp);
-	if(j == n){
-		temp->has = 1;
-	}
-	else{
-		func(temp, j + 1, s);
-	}
-}
 
 vector<string> removeSubfolders(vector<string>& folder) 
 {
-	int n = folder.size();
+    Node* root = new Node();
 
-	sort(all(folder));
+    sort(all(folder));
+    std::vector<string> ans;
 
-	Node* root = new Node("-1");
+    for(int j=0; j<folder.size(); j++){
+        string s = folder[j];
 
-	for(int i=0; i<n; i++){
-		string &s = folder[i];
+        Node *node = root;
+        bool isEnd = 0;
 
-		func(root, 0, s);		
-	}
+        for(int i=0; i<s.size(); i++)
+        {
+            if(s[i] == '/') continue;
 
-	std::vector<string> ans;
+            if(node->links[s[i] - 'a'] == NULL){
+                node->links[s[i] - 'a'] = new Node();
+            }
 
-	string curr ;
+            node = node->links[s[i] - 'a'];
 
-	traversal(root, ans, curr);
+            if(i+1 < s.size() and s[i+1] == '/' and node->flag){
+                isEnd = 1;
+                break;
+            }
+        }
+        if(!isEnd){
+            ans.pb(s);
+            node->flag = 1;
+        }
 
-
-	return ans;
+    }
+    return ans;
 }
 };
