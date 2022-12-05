@@ -37,60 +37,37 @@ public:
 // }
     
     
-// int pairSum(Node* head) 
-// {
-// 	Node *slow = head;
-// 	Node * fast = head;
-
-// 	while(fast and fast->next){
-// 		slow = slow->next;
-// 		fast = fast->next->next;
-// 	}
-
-// 	Node *pre = NULL;
-// 	Node * temp;
-// 	while(slow){
-// 		temp = slow->next;
-// 		slow->next = pre;
-// 		pre = slow;
-// 		slow = temp;
-// 	}
-
-
-// 	// display(head);br;
-// 	// display(pre);br;
-
-// 	int ans = INT_MIN;
-// 	fast = head;
-// 	while(pre){
-// 		ans = max(ans, pre->val + fast->val);
-// 		pre = pre->next;
-// 		fast = fast->next;
-// 	}
-// 	return ans;
-// }
-
-
-// Here we don't have to reverse the linked list
-// this code is great when we heave to go in reverse direction in linked list.
-    
-void traverse(Node* node,Node* &ptr, int &ans){
-	if(node == NULL) return;
-	// if(node->next == ptr)return;
-	traverse(node->next,ptr, ans);
-
-	// cout << node->val << " " << ptr->val;br;
-	ans = max(ans, node->val + ptr->val);
-	ptr = ptr->next;
-
-}
-
 int pairSum(Node* head) 
 {
-	Node *ptr = head;
-	int ans = INT_MIN;
-	traverse(head,ptr,  ans);
+	Node *slow = head;
+	Node * fast = head;
 
+	while(fast and fast->next){
+		slow = slow->next;
+		fast = fast->next->next;
+	}
+
+	Node *pre = NULL;
+	Node * temp;
+	while(slow){
+		temp = slow->next;
+		slow->next = pre;
+		pre = slow;
+		slow = temp;
+	}
+
+
+	// display(head);br;
+	// display(pre);br;
+
+	int ans = INT_MIN;
+	fast = head;
+	while(pre){
+		ans = max(ans, pre->val + fast->val);
+		pre = pre->next;
+		fast = fast->next;
+	}
 	return ans;
 }
+
 };
