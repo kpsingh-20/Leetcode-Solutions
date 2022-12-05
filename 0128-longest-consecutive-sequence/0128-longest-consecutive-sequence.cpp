@@ -51,9 +51,9 @@ public:
 
     
     
-    int longestConsecutive(vector<int>& nums) 
+int longestConsecutive(vector<int>& nums) 
 {
-	unordered_set<int> st(nums.begin(), nums.end());
+	set<int> st(nums.begin(), nums.end());
 
 	int ans = 0;
 	for(int i=0; i<nums.size(); i++)
@@ -71,7 +71,5 @@ public:
 	}
 
 	return ans;
- 
-
 }
 };
