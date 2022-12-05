@@ -70,7 +70,9 @@ public:
 // 	return ans;
 // }
 
-    
+
+// Here we don't have to reverse the linked list
+// this code is great when we heave to go in reverse direction in linked list.
     
 void traverse(Node* node,Node* &ptr, int &ans){
 	if(node == NULL) return;
