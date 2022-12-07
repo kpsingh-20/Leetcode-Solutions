@@ -20,8 +20,11 @@ int rangeSumBST(TreeNode* root, int low, int high)
         ans += root->val;
     }
     
-    ans += rangeSumBST(root->left, low, high);
-    ans += rangeSumBST(root->right, low, high);
+    if(root->val > low)
+        ans += rangeSumBST(root->left, low, high);
+    
+    if(root->val < high)
+        ans += rangeSumBST(root->right, low, high);
     
     return ans;
 
