@@ -9,14 +9,14 @@ public:
 
 #define     vi                  vector<int>
 
-bool isPrime(int n)
-{
-	for(int i=2; i*i<=n; i++)
-	{
-		if(n%i == 0) return 0;
-	}
-	return 1;
-}
+// bool isPrime(int n)
+// {
+// 	for(int i=2; i*i<=n; i++)
+// 	{
+// 		if(n%i == 0) return 0;
+// 	}
+// 	return 1;
+// }
 
 vector<int> threeDivisors(vector<long long> query, int q)
 {
@@ -25,7 +25,7 @@ vector<int> threeDivisors(vector<long long> query, int q)
 	int N = *max_element(query.begin(), query.end());
 	vector<bool> Prime(N, 1);
 	
-	for(int i=2; i<N; i++)
+	for(int i=2; i<N; i++)                   //  O(N*log(log(N)))
 	{
 	    if(Prime[i]){
 	        for(int j=2; j*i <= N; j++)
@@ -35,7 +35,7 @@ vector<int> threeDivisors(vector<long long> query, int q)
 	    }
 	}
 	vi temp(N+1,0);
-	for(int i=2; i<N; i++)
+	for(int i=2; i<N; i++)                      // O(N)
 	{
 	    temp[i] = temp[i-1];
 	    if(Prime[i]){
@@ -44,7 +44,7 @@ vector<int> threeDivisors(vector<long long> query, int q)
 	}
 	
 	
-	for(int i=0; i<query.size(); i++)
+	for(int i=0; i<query.size(); i++)           // O(q)
 	{
 		int n = query[i];
         int j = sqrt(n);
