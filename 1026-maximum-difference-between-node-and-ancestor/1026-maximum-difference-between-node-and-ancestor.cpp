@@ -16,25 +16,21 @@ public:
     
 int ans;
     
-vector<int> func(Node* root){
+int func(Node* root,int maxi,int mini){
     if(!root){
-        return {};
+        return ans;
     }
+    ans = max(ans, abs(maxi - root->val));
+    ans = max(ans, abs(mini - root->val));
     
-    vector<int> l = func(root->left);
-    vector<int> r = func(root->right);
+    if(root->val > maxi) maxi =  root->val;
+    if(root->val < mini) mini =  root->val;
     
-    l.push_back(root->val);
+    func(root->left, maxi, mini);
+    func(root->right, maxi, mini);
     
-    l.insert(l.end(), r.begin(), r.end());
     
-    for(int i=0; i<l.size(); i++)
-    {
-        // cout << l[i] << " " << endl;
-        ans = max(ans, abs(l[i] - root->val));
-    }
-    
-    return l;
+    return ans;
 }
     
     
@@ -43,7 +39,7 @@ int maxAncestorDiff(TreeNode* root)
 {
     ans = INT_MIN;
     
-    func(root);
+    return func(root, root->val, root->val);
     return ans;
     
 }
