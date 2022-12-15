@@ -61,9 +61,9 @@ ll maximumSubsequenceCount(string text, string pattern)
     // coutspace(suf);br
 
     // if adding a;
-    ans += max(pre[n-1], suf[0]);
-
-return ans;
+    ans += max(pre[n-1], suf[0]);               // as we can add char of first or second at any index.
+                                                // so if we add first we would attach it at 0;
+return ans;                                     // else we would attach it at last.
 }
 
 
