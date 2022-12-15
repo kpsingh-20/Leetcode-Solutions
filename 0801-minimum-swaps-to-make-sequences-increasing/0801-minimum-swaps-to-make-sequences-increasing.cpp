@@ -65,8 +65,9 @@ return -1;
 ////////////////////////////////////////////////////////////////////////////////
 vi s, t;    
 vvi dp;
-int func(int i, int minis, int minit, bool swapped)
-{
+int func(int i, int minis, int minit, bool swapped)     // hum kewal piche wala swap hua tha ki nahi ko hi kar
+{                                                       // rahe kyouki minimum wali values sirf kewal ek piche par depend kar rahi he eventually.
+// And this a new question as it breaks the rule of (jo chije change ho rahi ho uski DP bana lo.)
     if(i == s.size()) return 0;
 
     if(dp[i][swapped] != -1) return dp[i][swapped];
