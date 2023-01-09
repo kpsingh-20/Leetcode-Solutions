@@ -20,6 +20,9 @@ public:
 
 class Solution {
 public:
+    // recursive;
+    
+/*
     vector<int> ans;
     
     void func(Node* root)
@@ -35,4 +38,34 @@ public:
         func(root);
         return ans;
     }
+    
+*/
+    
+    
+// Here is the iterative approach
+vector<int> preorder(Node* root) {
+    
+    vector<int> ans;
+    stack<Node*> st;
+    st.push(root);
+    
+    while(!st.empty())
+    {
+        Node* node = st.top(); st.pop();
+        if(node == NULL) continue;
+        
+        ans.push_back(node->val);
+        
+        for(int i=node->children.size() - 1; i>=0; i--)
+        {
+            Node* &curr = node->children[i];
+            if(curr == NULL) continue;
+            
+            st.push(curr);
+        }
+    }
+    return ans;
+}
+  
+    
 };
