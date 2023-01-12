@@ -1,16 +1,19 @@
 class Solution {
 public:
+    
+    
+// O(NlogN) time and O(N) space
 vector<int> findLonely(vector<int>& nums) 
 {
     int n = nums.size();
     map<int, int> hash;
     
-    set<int> st;
+    // set<int> st;
 
     for(auto &num : nums)
     {
         hash[num]++;
-        st.insert(num);
+        // st.insert(num);                                         // O(N)
     }
     
     vector<int> ans;
@@ -22,10 +25,10 @@ vector<int> findLonely(vector<int>& nums)
         bool flag = 0;
     
             int l = num - 1;
-            if(st.find(l) != st.end()) flag = 1;
+            if(hash[l] >= 1) flag = 1;                      // using map insted of hashSet.
 
             int r = num + 1;
-            if(st.find(r) != st.end()) flag = 1;
+            if(hash[r] >= 1) flag = 1;
 
         
         if(!flag){
