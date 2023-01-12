@@ -8,7 +8,7 @@ vector<int> findLonely(vector<int>& nums)
     int n = nums.size();
     map<int, int> hash;
     
-    // set<int> st;
+    set<int> st;
 
     for(auto &num : nums)
     {
@@ -25,10 +25,10 @@ vector<int> findLonely(vector<int>& nums)
         bool flag = 0;
     
             int l = num - 1;
-            if(hash[l] >= 1) flag = 1;                      // using map insted of hashSet.
+            if(hash.find(l) != hash.end()) flag = 1;
 
             int r = num + 1;
-            if(hash[r] >= 1) flag = 1;
+            if(hash.find(r) != hash.end()) flag = 1;
 
         
         if(!flag){
