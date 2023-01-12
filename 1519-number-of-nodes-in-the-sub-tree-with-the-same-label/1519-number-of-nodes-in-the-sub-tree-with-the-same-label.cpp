@@ -27,6 +27,11 @@ public:
 #define 	coutvvi(grid)		for(auto &x: grid){ coutspace(x);br; }
 #define 	cinvvi(grid)		for(auto &x : grid){cinvec(x);}
 
+    
+// In this question I am returning a map which gives runtime of 2284 ms, and vortubrac passess array and vector which gives runtime of 800ms and 1200 ms respectively, 
+
+// as the labels[node] can only be 26 so passing or returning it won't give TLE.
+    
 vvi g;
 
 map<char, int> dfs(int node, int par, string &labels, vi &ans)
